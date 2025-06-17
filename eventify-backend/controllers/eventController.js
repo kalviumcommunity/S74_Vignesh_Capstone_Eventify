@@ -1,13 +1,14 @@
-const getAllEvents = (req, res) => {
-  const sampleEvents = [
-    { id: 1, name: "Wedding at Trichy", date: "2025-06-15" },
-    { id: 2, name: "Corporate Event in Chennai", date: "2025-07-01" },
-  ];
+const Event = require("../models/eventModels");
 
-  res.status(200).json({
-    message: "Events fetched successfully",
-    events: sampleEvents,
-  });
+const createEvent = async (req, res) => {
+  try {
+    const { title, date, location, description } = req.body;
+    const newEvent = new Event({ title, date, location, description });
+    await newEvent.save();
+    res.status(201).json({ message: "Event created successfully", newEvent });
+  } catch (err) {
+    res.status(500).json({ error: "Something went wrong", details: err });
+  }
 };
 
-module.exports = { getAllEvents };
+module.exports = { createEvent };
