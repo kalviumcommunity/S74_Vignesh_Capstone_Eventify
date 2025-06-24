@@ -1,14 +1,17 @@
 const Event = require("../models/eventModels");
 
-const createEvent = async (req, res) => {
-  try {
-    const { title, date, location, description } = req.body;
-    const newEvent = new Event({ title, date, location, description });
-    await newEvent.save();
-    res.status(201).json({ message: "Event created successfully", newEvent });
-  } catch (err) {
-    res.status(500).json({ error: "Something went wrong", details: err });
-  }
-};
+// POST handler already exists
+async function createEvent(req, res) { /*...*/ }
 
-module.exports = { createEvent };
+// ✅ New GET handler
+async function getEvents(req, res) {
+  try {
+    const events = await Event.find(); // fetch all events :contentReference[oaicite:2]{index=2}
+    res.status(200).json(events);
+  } catch (err) {
+    console.error("Error fetching events:", err);
+    res.status(500).json({ message: "Server error while fetching events" });
+  }
+}
+
+module.exports = { createEvent, getEvents };

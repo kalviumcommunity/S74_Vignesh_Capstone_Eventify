@@ -6,4 +6,4 @@ const router = express.Router();
 // POST endpoint
 router.post("/events", createEvent);
 
-module.exports = router;
+module.exports = router; 

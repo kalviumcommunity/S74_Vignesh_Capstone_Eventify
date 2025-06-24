@@ -7,6 +7,8 @@ const { createEvent } = require("./controllers/eventController");
 const app = express();
 app.use(express.json());
 
+app.post("/api/events", createEvent);
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB connected"))
@@ -14,6 +16,5 @@ mongoose
 
 const PORT = process.env.PORT || 5000;
 
-app.post("/api/events", createEvent);
 
-module.exports = app;
+module.exports = app; 

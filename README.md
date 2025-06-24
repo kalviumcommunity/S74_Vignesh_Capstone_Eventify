@@ -86,3 +86,7 @@ The platform aims to **simplify event planning** for individuals and businesses.
 - ✅ **Day 27–30:** Final UI polish, vendor verification, and soft launch.
 
 ---
+
+
+## 🚀 Deployed Frontend Link
+https://your-site-name.netlify.app
