@@ -3,9 +3,17 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const { createEvent } = require("./controllers/eventController");
+const { getEvents } = require("./controllers/eventController");
+const { updateEvent } = require("./controllers/eventController");
+const { deleteEvent } = require("./controllers/eventController");
 
 const app = express();
 app.use(express.json());
+
+app.post("/api/events", createEvent);
+app.get("/api/events", getEvents);
+app.put("/api/events/:id", updateEvent);
+app.delete("/api/events/:id", deleteEvent);
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -14,6 +22,5 @@ mongoose
 
 const PORT = process.env.PORT || 5000;
 
-app.post("/api/events", createEvent);
 
-module.exports = app;
+module.exports = app; 
