@@ -1,11 +1,20 @@
-const Event = require("../models/eventModels");
+const Event = require(  "../models/eventModels");
 
 const createEvent = async (req, res) => {
   try {
     const { name, date, location, description } = req.body;
-    const newEvent = new Event({ name, date, location, description });
+
+    // req.user.id comes from auth middleware
+    const newEvent = new Event({
+      name,
+      date,
+      location,
+      description,
+      createdBy: req.user.id // attach logged-in user
+    });
+
     await newEvent.save();
-    res.status(201).json({ message: "Event created successfully", newEvent });
+    res.status(201).json({ message: "Event created successfully", event: newEvent });
   } catch (err) {
     res.status(500).json({ error: "Something went wrong", details: err });
   }
